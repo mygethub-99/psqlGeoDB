@@ -19,7 +19,7 @@ cursor.execute("CREATE TABLE SiteLocation (id SERIAL PRIMARY KEY, FA INTEGER,\
 cursor.execute("CREATE TABLE SiteGeo (FA INTEGER PRIMARY KEY, outline GEOGRAPHY )")
 cursor.execute("CREATE TABLE SiteFreq (ID SERIAL PRIMARY KEY, FA INTEGER, f700 \
                                        VARCHAR, F1900 VARCHAR, FAWS VARCHAR, \
-                                       f850 VARCHAR, outline GEOGRAPHY)")
+                                       f850 VARCHAR, fips INTEGER, outline GEOGRAPHY)")
 
 cursor.execute("CREATE TABLE speclandscape (id serial primary key, fips integer,\
                                             f1900 varchar, f850 varchar, \
