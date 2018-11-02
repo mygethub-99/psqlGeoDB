@@ -14,9 +14,9 @@ cursor.execute("DELETE FROM sitefreq")
 cursor.execute("DELETE FROM sitelocation")
 cursor.execute("DELETE FROM speclandscape")
 
-shapefile = osgeo.ogr.Open('nsbbuf.shp')
+shapefile = osgeo.ogr.Open('C:\\Path\Shapefile.shp')
 layer = shapefile.GetLayer(0)
-shapefile2 = osgeo.ogr.Open("C:\\Users\ow4253\Documents\FMEData\Darren\SpectrumLandscape_GS11302012\spectrumcleanup\SpeclandAllBan.shp")
+shapefile2 = osgeo.ogr.Open("C:\\Path\Shapefile2.shp")
 layer2 = shapefile2.GetLayer(0)
 for i in range(layer.GetFeatureCount()):
     feature = layer.GetFeature(i)
