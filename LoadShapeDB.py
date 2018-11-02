@@ -2,21 +2,21 @@
 """
 Created on Wed Oct 24 16:45:05 2018
 
-@author: 
+@author: ow4253
 """
 import psycopg2
 import osgeo.ogr
 
-connection = psycopg2.connect(database="geoowen1",user="postgres", password="*$^#$@$")
+connection = psycopg2.connect(database="geoowen1",user="postgres", password="amanda12")
 cursor = connection.cursor()
 cursor.execute("DELETE FROM sitegeo")
 cursor.execute("DELETE FROM sitefreq")
 cursor.execute("DELETE FROM sitelocation")
 cursor.execute("DELETE FROM speclandscape")
 
-shapefile = osgeo.ogr.Open('C:\\Path\Shapefile.shp')
+shapefile = osgeo.ogr.Open('nsbbuf.shp')
 layer = shapefile.GetLayer(0)
-shapefile2 = osgeo.ogr.Open("C:\\Path\Shapefile2.shp")
+shapefile2 = osgeo.ogr.Open("C:\\Users\ow4253\Documents\FMEData\Darren\SpectrumLandscape_GS11302012\spectrumcleanup\SpeclandAllBan.shp")
 layer2 = shapefile2.GetLayer(0)
 for i in range(layer.GetFeatureCount()):
     feature = layer.GetFeature(i)
@@ -34,8 +34,8 @@ for i in range(layer.GetFeatureCount()):
     cursor.execute("INSERT INTO SiteLocation(FA, STATE, COUNTYSTATE, FIPS, outline)\
                    VALUES (%s, %s, %s, %s, ST_GeogFromText(%s))", (fa, state, countystate, fips, wkt))
     cursor.execute("INSERT INTO SiteGeo (FA, outline) VALUES (%s, ST_GeogFromText(%s))", (fa, wkt))
-    cursor.execute("INSERT INTO SiteFreq (FA, f700, F1900, FAWS, F850, outline)\
-                   VALUES (%s, %s, %s, %s, %s, ST_GeogFromText(%s))", (fa, f700, f1900, AWS, f850, wkt))
+    cursor.execute("INSERT INTO SiteFreq (FA, f700, F1900, FAWS, F850, fips, outline)\
+                   VALUES (%s, %s, %s, %s, %s, %s, ST_GeogFromText(%s))", (fa, f700, f1900, AWS, f850, fips, wkt))
 connection.commit()  
   
 for i in range(layer2.GetFeatureCount()):
