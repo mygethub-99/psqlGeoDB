@@ -1,0 +1,16 @@
+
+--Creating a new table and inserting data from anothe table
+
+create table public."sigbuf"
+( gid integer NOT NULL DEFAULT nextval('stores_point_gid_seq'::regclass),
+add character varying(39) COLLATE pg_catalog."default",
+city character varying(12) COLLATE pg_catalog."default",
+lat numeric,
+long numeric,
+geom geometry(Polygon));
+
+insert INTO public."sigbuf" (gid, add, city, lat, long, geom)			  
+select
+gid, addresslin as add, city, latitude as lat, longitude as long,
+ST_Buffer(public."stores".geom,200)::geometry(Polygon, 0) as geom
+from public."stores"
