@@ -1,0 +1,7 @@
+--Creating Point data with lat and long provided within a table
+
+--if a new column is needed
+alter table <tablename> add column <columnname> geometry(Point);
+--Now update the column with geom data
+update <tablename>
+set <columnname> = ST_SetSRID(ST_MakePoint(long, lat),4326)
